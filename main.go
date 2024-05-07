@@ -2,6 +2,7 @@ package main
 
 import (
 	"kyzsuki/api/middlewire"
+	"kyzsuki/api/routes/auth"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -17,6 +18,12 @@ func main() {
 			"message": "pong",
 		})
 	})
+
+	authGroup := r.Group("/auth")
+	{
+		authGroup.POST("/register", auth.Register)
+		authGroup.POST("/login", auth.Login)
+	}
 
 	r.Run(":8080")
 }
